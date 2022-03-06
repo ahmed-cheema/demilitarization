@@ -26,7 +26,7 @@ county_groups <- countydata %>%
   mutate(cat_var = paste0("Group ",
                           sample(1:4, nrow(countydata), replace = TRUE)))
 
-household_data <- left_join(counties_sf, county_groups, by = "county_fips") %>%
+county_data <- left_join(counties_sf, county_groups, by = "county_fips") %>%
   filter(state_name == "Nevada") %>%
   rename(county = county_name) %>%
   left_join(tf, by='county') %>%
@@ -34,7 +34,7 @@ household_data <- left_join(counties_sf, county_groups, by = "county_fips") %>%
 
 # graph
 
-household_data %>%
+county_data %>%
   ggplot() +
   geom_sf(mapping = aes(fill = cost),
           color = "#ffffff", size = 0.05) +
